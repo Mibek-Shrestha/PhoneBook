@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
+// import { DummyData } from "./components/DummyData";
+const App = () => {
+  const [searchResults, setSearchResults] = useState([]);
+  const names = ["John", "Jane", "Alice", "Bob", "Carol"];
+  const handleSearch = (results) => {
+    setSearchResults(results);
+    console.log(results);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h2>Phone Book</h2>
+      <SearchBar names={names} onSearch={handleSearch} />
+      <ul>
+        {searchResults.map((result, index) => {
+          return <li key={index}>{result}</li>;
+        })}
+      </ul>
+    </>
   );
-}
+};
 
 export default App;
